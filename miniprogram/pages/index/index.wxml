@@ -1,0 +1,55 @@
+<navigation-bar title="待办" back="{{false}}" />
+
+<view class="index-page">
+  <view class="index-search">
+    <view class="index-search__inner">
+      <text class="index-search__icon">🔍</text>
+      <input
+        class="index-search__input"
+        placeholder="搜索待办事项..."
+        placeholder-class="index-search__placeholder"
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <text
+        wx:if="{{searchKeyword}}"
+        class="index-search__clear"
+        catchtap="onClearSearch"
+      >✕</text>
+    </view>
+  </view>
+
+  <category-filter
+    categories="{{tabs}}"
+    active-id="{{selectedCategoryId}}"
+    bind:change="onTabTap"
+  />
+
+  <view wx:if="{{displayRows.length > 0}}" class="index-page__list">
+    <view
+      wx:for="{{displayRows}}"
+      wx:key="id"
+      wx:for-index="index"
+      data-index="{{index}}"
+      bindtouchstart="onDragStart"
+      bindtouchmove="onDragMove"
+      bindtouchend="onDragEnd"
+      bindtouchcancel="onDragEnd"
+      class="index-page__item {{dragStartIndex === index ? 'index-page__item--dragging' : ''}}"
+    >
+      <todo-item
+        todo="{{item}}"
+        category-name="{{item.categoryName}}"
+        bind:toggle="onToggleTodo"
+        bind:edit="onEditTodo"
+        bind:remove="onDeleteTodo"
+      />
+    </view>
+  </view>
+
+  <empty-state wx:else text="{{emptyHint}}" />
+</view>
+
+<view class="index-fab" bindtap="onAdd" hover-class="index-fab--hover">
+  <text class="index-fab__icon">+</text>
+</view>

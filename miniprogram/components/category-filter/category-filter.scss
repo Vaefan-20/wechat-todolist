@@ -1,0 +1,32 @@
+.category-filter {
+  width: 100%;
+  white-space: nowrap;
+  margin-bottom: 16rpx;
+}
+
+.category-filter__inner {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16rpx;
+  padding: 0 var(--spacing-page, 32rpx) 8rpx;
+  box-sizing: border-box;
+}
+
+.category-filter__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14rpx 28rpx;
+  font-size: 26rpx;
+  color: var(--color-text-primary, #333333);
+  background: var(--color-card, #ffffff);
+  border-radius: 999rpx;
+  border: 1rpx solid var(--color-border, #e5e5e5);
+  flex-shrink: 0;
+}
+
+.category-filter__chip--active {
+  color: var(--color-on-primary, #ffffff);
+  background: var(--color-primary, #07c160);
+  border-color: var(--color-primary, #07c160);
+}

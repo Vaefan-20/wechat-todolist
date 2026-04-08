@@ -1,0 +1,112 @@
+.index-page {
+  min-height: 100vh;
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+.index-search {
+  padding: 20rpx var(--spacing-page, 32rpx) 16rpx;
+}
+
+.index-search__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: var(--color-card, #ffffff);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--color-border, #e5e5e5);
+  gap: 12rpx;
+}
+
+.index-search__icon {
+  font-size: 32rpx;
+  color: var(--color-text-secondary, #9ca3af);
+}
+
+.index-search__input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--color-text, #1f2937);
+}
+
+.index-search__placeholder {
+  color: var(--color-text-muted, #c8c8c8);
+}
+
+.index-search__clear {
+  font-size: 36rpx;
+  color: var(--color-text-muted, #c8c8c8);
+  line-height: 1;
+}
+
+.index-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 16rpx;
+  padding: 0 var(--spacing-page, 32rpx) 16rpx;
+  overflow-x: auto;
+}
+
+.index-tabs__item {
+  flex-shrink: 0;
+  padding: 16rpx 36rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary, #888888);
+  background: var(--color-card, #ffffff);
+  border-radius: 999rpx;
+  border: 1rpx solid var(--color-border, #e5e5e5);
+}
+
+.index-tabs__item--active {
+  color: var(--color-on-primary, #ffffff);
+  background: var(--color-primary, #4f46e5);
+  border-color: var(--color-primary, #4f46e5);
+  font-weight: 500;
+}
+
+.index-page__list {
+  margin: 0 var(--spacing-page, 32rpx);
+  background: var(--color-card, #ffffff);
+  border-radius: var(--radius-card, 20rpx);
+  overflow: hidden;
+  box-shadow: 0 8rpx 40rpx rgba(79, 70, 229, 0.08);
+}
+
+.index-page__list .todo-swipe:last-child {
+  border-bottom: none;
+}
+
+.index-page__item {
+  touch-action: none;
+}
+
+.index-page__item--dragging {
+  opacity: 0.5;
+}
+
+.index-fab {
+  position: fixed;
+  right: calc(var(--spacing-page, 32rpx) + env(safe-area-inset-right));
+  bottom: calc(48rpx + env(safe-area-inset-bottom));
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: var(--color-primary, #4f46e5);
+  box-shadow: 0 16rpx 40rpx rgba(79, 70, 229, 0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.index-fab--hover {
+  opacity: 0.92;
+}
+
+.index-fab__icon {
+  color: var(--color-on-primary, #ffffff);
+  font-size: 64rpx;
+  font-weight: 300;
+  line-height: 1;
+  margin-top: -6rpx;
+}

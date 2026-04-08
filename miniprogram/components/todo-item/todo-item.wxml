@@ -1,0 +1,35 @@
+<view class="todo-swipe">
+  <view class="todo-swipe__del" catchtap="onDeleteTap">删除</view>
+  <view
+    class="todo-swipe__front {{animating ? 'todo-swipe__front--anim' : ''}}"
+    style="transform: translate3d({{offset}}px, 0, 0)"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchEnd"
+  >
+    <view class="todo-row">
+      <view class="todo-row__drag" catchtap="onDrag" wx:if="{{false}}">
+        <text class="todo-row__dragicon">☰</text>
+      </view>
+      <view class="todo-row__checkwrap" catchtap="onToggle">
+        <view class="todo-row__circle {{todo.done ? 'todo-row__circle--on' : ''}}">
+          <text wx:if="{{todo.done}}" class="todo-row__tick">✓</text>
+        </view>
+      </view>
+      <view class="todo-row__body" bindtap="onEdit">
+        <view class="todo-row__titleline">
+          <view class="todo-row__dot todo-row__dot--{{todo.priority}}" />
+          <text class="todo-row__title {{todo.done ? 'todo-row__title--done' : ''}}">{{todo.title}}</text>
+        </view>
+        <view wx:if="{{categoryName || dueDisplay}}" class="todo-row__meta">
+          <text wx:if="{{categoryName}}" class="todo-row__cat">{{categoryName}}</text>
+          <view wx:if="{{dueDisplay}}" class="todo-row__duewrap">
+            <view class="todo-row__cal" />
+            <text class="todo-row__duedate">{{dueDisplay}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

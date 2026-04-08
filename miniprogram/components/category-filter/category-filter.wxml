@@ -1,0 +1,13 @@
+<scroll-view class="category-filter" scroll-x enhanced show-scrollbar="{{false}}">
+  <view class="category-filter__inner">
+    <view
+      wx:for="{{categories}}"
+      wx:key="id"
+      class="category-filter__chip {{activeId === item.id ? 'category-filter__chip--active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onSelect"
+    >
+      {{item.name}}
+    </view>
+  </view>
+</scroll-view>

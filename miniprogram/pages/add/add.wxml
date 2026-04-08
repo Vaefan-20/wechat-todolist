@@ -1,0 +1,134 @@
+<view class="add-root">
+  <navigation-bar
+    title="{{isEdit ? '编辑待办' : '新增待办'}}"
+    back="{{true}}"
+    background="#4F46E5"
+    color="#FFFFFF"
+    extClass="add-nav-bar"
+  />
+
+  <view class="add-page">
+    <view class="add-card">
+      <view class="add-card__head">
+        <view class="add-card__labels">
+          <text class="add-card__label">标题</text>
+          <text class="add-badge add-badge--danger">必填</text>
+        </view>
+        <text class="add-card__count">{{titleLen}}/30</text>
+      </view>
+      <input
+        class="add-card__input"
+        value="{{title}}"
+        placeholder="请输入待办标题"
+        placeholder-class="add-placeholder"
+        maxlength="30"
+        bindinput="onTitleInput"
+      />
+    </view>
+
+    <view class="add-card">
+      <view class="add-card__head">
+        <view class="add-card__labels">
+          <text class="add-card__label">描述</text>
+          <text class="add-badge add-badge--muted">选填</text>
+        </view>
+        <text class="add-card__count">{{descLen}}/200</text>
+      </view>
+      <textarea
+        class="add-card__textarea"
+        value="{{description}}"
+        placeholder="添加更多说明..."
+        placeholder-class="add-placeholder"
+        maxlength="200"
+        auto-height
+        bindinput="onDescriptionInput"
+      />
+    </view>
+
+    <view class="add-card add-card--flush">
+      <text class="add-card__section-title">优先级</text>
+      <picker
+        mode="selector"
+        range="{{priorityLabels}}"
+        value="{{priorityIndex}}"
+        bindchange="onPriorityChange"
+      >
+        <view class="add-priority-row add-priority-row--{{priorityTone}}">
+          <view class="add-priority-row__left">
+            <view class="add-priority-dot add-priority-dot--{{priorityTone}}" />
+            <text class="add-priority-row__text">{{priorityLabels[priorityIndex]}}</text>
+          </view>
+          <text class="add-chevron">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="add-card add-card--flush">
+      <text class="add-card__section-title">分类</text>
+      <view class="add-cats">
+        <view
+          wx:for="{{categories}}"
+          wx:key="id"
+          class="add-cat {{categoryIndex === index ? 'add-cat--active' : ''}}"
+          data-index="{{index}}"
+          bindtap="onCategoryTap"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <view class="add-card add-card--flush">
+      <view class="add-card__head add-card__head--tight">
+        <view class="add-card__labels">
+          <text class="add-card__label">截止时间</text>
+          <text class="add-badge add-badge--muted">选填</text>
+        </view>
+      </view>
+      <block wx:if="{{dueDatePart}}">
+        <view class="add-datetime-rows">
+          <picker
+            mode="date"
+            value="{{dueDatePart}}"
+            start="1970-01-01"
+            end="2100-12-31"
+            bindchange="onDueDatePartChange"
+          >
+            <view class="add-date-row__inner add-date-row__inner--stack">
+              <text class="add-datetime-kind">日期</text>
+              <text class="add-date-row__text">{{dueDatePart}}</text>
+              <text class="add-chevron">›</text>
+            </view>
+          </picker>
+          <picker mode="time" value="{{dueTimePart}}" bindchange="onDueTimePartChange">
+            <view class="add-date-row__inner add-date-row__inner--stack">
+              <text class="add-datetime-kind">时间</text>
+              <text class="add-date-row__text">{{dueTimePart}}</text>
+              <text class="add-chevron">›</text>
+            </view>
+          </picker>
+          <view class="add-datetime-actions">
+            <text class="add-date-clear" catchtap="onClearDueDate">清除</text>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <picker
+          mode="date"
+          start="1970-01-01"
+          end="2100-12-31"
+          bindchange="onDueDatePartChange"
+        >
+          <view class="add-date-row__inner add-date-row__inner--placeholder">
+            <text class="add-placeholder-static">选择日期与时间（先选日期）</text>
+            <text class="add-chevron add-chevron--muted">›</text>
+          </view>
+        </picker>
+      </block>
+    </view>
+
+    <button class="add-submit" bindtap="onConfirm" hover-class="add-submit--hover">
+      {{isEdit ? '保存修改' : '创建待办'}}
+    </button>
+  </view>
+</view>

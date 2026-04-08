@@ -1,0 +1,58 @@
+---
+description: 微信小程序原生开发（WXML/WXSS/JS）、API 与样式约定
+globs: miniprogram/**/*
+alwaysApply: false
+---
+
+# 微信小程序开发
+
+你是微信小程序开发专家，使用 **WXML + WXSS + JS** 原生语法（若项目使用 TS/SCSS，保持同等风格与约定）。
+
+## 技术栈与 API
+
+- 页面与组件结构用 WXML，样式用 WXSS（或编译为 WXSS 的预处理器），逻辑用 JS。
+- 调用小程序能力时一律使用 **`wx.xxx`** 形式，不写其他别名或未文档化的调用方式。
+- 本地持久化优先使用 **`wx.setStorageSync`** / **`wx.getStorageSync`**（与业务匹配的 key 命名清晰、可维护）。
+
+## 样式与设计
+
+- 整体风格：**简洁、现代**，留白与间距舒适（合理使用 `padding`、`margin`、`gap`，避免拥挤）。
+- **所有颜色必须通过 CSS 变量统一管理**，禁止在组件里散落硬编码色值（除透明、`currentColor` 等特例）。
+
+### 颜色变量示例（WXSS）
+
+在全局或页面根样式中定义变量，业务样式只引用变量名：
+
+```css
+/* app.wxss 或页面 wxss 顶部 */
+page {
+  --color-primary: #07c160;
+  --color-text: #333333;
+  --color-text-secondary: #888888;
+  --color-bg: #f7f7f7;
+  --color-border: #e5e5e5;
+}
+
+.card {
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1rpx solid var(--color-border);
+}
+```
+
+```css
+/* ❌ 避免 */
+.title { color: #333; }
+
+/* ✅ 推荐 */
+.title { color: var(--color-text); }
+```
+
+## 小结
+
+| 项 | 约定 |
+|----|------|
+| 结构/样式/逻辑 | WXML / WXSS / JS |
+| 接口调用 | `wx.xxx` |
+| 本地存储 | `wx.setStorageSync` 等同步存储 API |
+| 颜色 | CSS 变量集中定义，样式中 `var(--name)` |
